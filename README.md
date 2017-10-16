@@ -19,7 +19,8 @@ If you want to run this on your local system for testing.  CD into the root of t
 
 Before launching 2 dependices are required
 * [Docker](https://www.docker.com/) - Software containerization software
-* [node.js] - evented I/O for the backend
+* [Node js](https://nodejs.org/) - evented I/O for the backend
+
 
 Once installed you may run these commands
 
@@ -41,9 +42,8 @@ Car.os uses a couple of open source libraries to run properly
 * [Postgres SQL](https://www.docker.com/) - Open source SQL databse
 * [Node js](https://nodejs.org/) - evented I/O for the backend
 * [ReactJS](https://www.docker.com/) - Javascript library for building user interfaces
+ # 
   
-  
-    
 Below is a visual representation of the software architecture
         
           
