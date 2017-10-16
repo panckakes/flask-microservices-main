@@ -48,3 +48,18 @@ Below is a visual representation of the software architecture
         
           
 ![Tech map](https://i.imgur.com/wJu9tdM.png)
+  
+# Technologies
+
+### Hardware
+The System is comprised of
+- 3 raspberry pi's
+- bluetooth OBD2 reader 
+- navio2 hat for the raspberry pi
+- 7" IPS touch screen
+
+One pi will be used strictly for data aquisition from the OBD2 device and the navio 2 board.  The raw data will be retrived on [prometheus_client](https://github.com/prometheus/client_python) server
+and sent over to the Prometheus sever over wifi on port 8000.  The Pi with the prometheus sever will serve as the main computer of this network.  This
+pi will run the nginx-flask server, launch docker containers, serve the front end, host the postgres SQL server, host the prometheus server, and hopefully
+be the master node for load balancing with Kubernetes.  The final pi will strictly [boot](https://github.com/guysoft/FullPageOS) into a chrome full-screen window and connect to the URL of the 
+server to render the application on the touch screen.
