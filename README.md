@@ -31,3 +31,5 @@ $ docker-compose up --build
 The server should be running on 127.0.0.0:9000
 
 # Tech Stack
+![Tech map](https://i.imgur.com/wJu9tdM.png)
+
