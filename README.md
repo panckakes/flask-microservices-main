@@ -31,5 +31,20 @@ $ docker-compose up --build
 The server should be running on 127.0.0.0:9000
 
 # Tech Stack
+Car.os uses a couple of open source libraries to run properly  
+  
+  
+* [Docker](https://www.docker.com/) - Software containerization software
+* [Flask](http://flask.pocoo.org/) - Python based microframework for backend development
+* [nginx](https://www.nginx.com/) - High performance web server
+* [Prometheus](https://www.docker.com/) - Time series database and monitoring system
+* [Postgres SQL](https://www.docker.com/) - Open source SQL databse
+* [Node js](https://nodejs.org/) - evented I/O for the backend
+* [ReactJS](https://www.docker.com/) - Javascript library for building user interfaces
+  
+  
+    
+Below is a visual representation of the software architecture
+        
+          
 ![Tech map](https://i.imgur.com/wJu9tdM.png)
-
