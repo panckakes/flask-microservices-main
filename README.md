@@ -4,7 +4,7 @@
   
 # Introduction
 Car.os is a custom navigatgion system built for my personal car to introduce features that exist in new cars (and not).  The system utilizes raspberry pis 
-and a 7" touch screen that will integrate into a double-din enclosure to replace the current radio head unit.  
+and a 7" touch screen that will integrate into a double-din enclosure to replace the current radio head unit.  The purpose of this project is to utilize current technologies and create a system architecture that runs effeciently on low power systems.
 
 Main featues of this project include:
 
