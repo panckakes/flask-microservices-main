@@ -52,6 +52,11 @@ $ docker-compose run users-service python manage.py seed_db
 $ docker-compose run users-service python manage.py test
 ```
 #  
+
+  List all running and stopped containers:
+```sh
+$ docker ps -a
+```
   Stop containers (gracefully):
 ```sh
 $ docker-compose stop
