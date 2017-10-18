@@ -56,13 +56,21 @@ $ docker-compose run users-service python manage.py test
 ```sh
 $ docker-compose stop
 ```
-
+  Stop all running containers:
+```sh
+$ docker stop $(docker ps -aq)
+```
+  remove containers:
+```sh
+$ docker-compose rm
+```
   build containers:
 ```sh
 $ docker-compose --build
 $ [or]
 $ docker-compose run -d --build
 ```
+
 
 # Tech Stack
 Car.os uses a couple of open source libraries to run properly  
