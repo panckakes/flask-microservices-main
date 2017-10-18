@@ -31,6 +31,39 @@ $ docker-compose up --build
 
 The server should be running on 127.0.0.0:9000
 
+### Useful Commands
+
+Make sure you are in the same directory as docker-compose.yml
+
+  Start in detached mode:
+```sh
+$ docker-compose up -d
+```
+  Create database:
+```sh
+$ docker-compose run users-service python manage.py recreate_db
+```
+  Seed Database:
+```sh
+$ docker-compose run users-service python manage.py seed_db
+```
+  run tests:
+```sh
+$ docker-compose run users-service python manage.py test
+```
+#  
+  Stop containers (gracefully):
+```sh
+$ docker-compose stop
+```
+
+  build containers:
+```sh
+$ docker-compose --build
+$ [or]
+$ docker-compose run -d --build
+```
+
 # Tech Stack
 Car.os uses a couple of open source libraries to run properly  
   
