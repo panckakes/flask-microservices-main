@@ -95,6 +95,13 @@ Below is a visual representation of the software architecture
           
 ![Tech map](https://i.imgur.com/wJu9tdM.png)
   
+# Microservices
+  
+Becuase Car.os is using a non monolithic application structure, there will be multiple microservices running in parallel.
+Below are a list of microservices built to run this application
+
+* [Bluetooth](https://github.com/panckakes/nav-microservices-bluetooth/tree/master) - Bluetooth microservice hosting all hardware bluetooth functions
+
 # Technologies
 
 ### Hardware
