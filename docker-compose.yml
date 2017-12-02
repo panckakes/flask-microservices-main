@@ -1,8 +1,38 @@
 version: '2.1'
 
+volumes:
+    prometheus_data: {}
+
 services:
-  users-db:
-    container_name: users-db
+
+
+  db-prometheus:
+    image: prom/prometheus:v1.8.2
+    volumes:
+      - ./prometheus_server/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    # command:
+    #   - '--config.file=/etc/prometheus/prometheus.yml'
+    #   - '--storage.tsdb.path=/prometheus'
+    #   - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+    #   - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090   # expose ports - HOST:CONTAINER
+    # links:
+    #   - cadvisor:cadvisor
+    #   - alertmanager:alertmanager
+    # depends_on:
+    #   - cadvisor
+    # networks:
+    #   - back-tier
+    # restart: always
+    # deploy:
+    #   placement:
+    #     constraints:
+    #       - node.hostname == moby
+
+  db-postgres:
+    container_name: db-postgres
     build: https://github.com/panckakes/flask-microservices-users.git#master:project/db
     ports:
         - 5435:5432  # expose ports - HOST:CONTAINER
@@ -12,9 +42,9 @@ services:
     healthcheck:
       test: exit 0
 
-  users-service:
-    container_name: users-service
-    build: https://github.com/panckakes/flask-microservices-users.git
+  web-users-service:
+    container_name: web-users-service
+    build: https://github.com/panckakes/flask-microservices-users.git#features
     ports:
       - 5001:5000 # expose ports - HOST:CONTAINER
     environment:
@@ -22,37 +52,38 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
     depends_on:
-      users-db:
+      db-postgres:
         condition: service_healthy
     links:
-      - users-db
+      - db-postgres
 
-  nginx:
-    container_name: nginx
+  web-nginx:
+    container_name: web-nginx
     build: ./nginx/
     restart: always
     ports:
       - 80:80
     depends_on:
-      users-service:
+      web-users-service:
         condition: service_started
-      web-service:
+      web-reactjs:
         condition: service_started
     links:
-      - users-service
-      - web-service
+      - web-users-service
+      - web-reactjs
 
-  web-service:
-    container_name: web-service
+  web-reactjs:
+    container_name: web-reactjs
     build:
-      context: https://github.com/panckakes/flask-microservices-client.git
+      context: https://github.com/panckakes/flask-microservices-client.git#features
       args:
         - NODE_ENV=development
         - REACT_APP_USERS_SERVICE_URL=http://127.0.0.1
+        - REACT_APP_NAVIO_TEMPERATURE_SERVICE_URL=http://127.0.0.1:9090
     ports:
       - '9000:9000' # expose ports - HOST:CONTAINER
     depends_on:
-      users-service:
+      web-users-service:
         condition: service_started
     links:
-      - users-service
+      - web-users-service
